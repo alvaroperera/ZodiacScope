@@ -7,13 +7,12 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ZodiacSignMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var zodiacSignsTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         zodiacSignsTable.delegate = self
         zodiacSignsTable.dataSource = self
     }
@@ -26,6 +25,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ZodiacSignViewCell
         cell.fillCell(from: ZodiacSign.getAllZodiacSigns()[indexPath.row])
         return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowZodiacSignDetail" {
+            if let indexPath = zodiacSignsTable.indexPathForSelectedRow {
+                let zodiacSign = ZodiacSign.getAllZodiacSigns()[indexPath.row]
+                let destinationVC = segue.destination as! ZodiacSignDetailViewController
+                destinationVC.zodiacSign = zodiacSign }
+        }
     }
 }
 

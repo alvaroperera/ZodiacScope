@@ -13,7 +13,6 @@ class ZodiacSignViewCell: UITableViewCell {
     
     @IBOutlet weak var zodiacSignDatesLabel: UILabel!
     
-    
     @IBOutlet weak var zodiacSignImgView: UIImageView!
     
     override func awakeFromNib() {
@@ -30,6 +29,7 @@ class ZodiacSignViewCell: UITableViewCell {
     func fillCell(from zodiacSign: ZodiacSign) {
         zodiacSignNameLabel.text = zodiacSign.name
         zodiacSignDatesLabel.text = zodiacSign.dates
+        zodiacSignImgView.image = UIImage(named: zodiacSign.iconImage)
     }
     
 }
